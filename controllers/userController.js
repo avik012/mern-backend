@@ -8,15 +8,28 @@ const Product = require('../models/productModel');
 const cloudinary = require('cloudinary')
 
 exports.registerUser = catchAsyncError( async(req,res, next)=>{
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avtar,{
+    
+    // let myCloud;
+    // let myval = req.body.avtar;
+    // if(req.body.avtar){
+    //     console.log(Boolean(req.body.avtar),'avtrrrr1',req.body.avtar,myval === 'undefined');
+    //     myCloud = await cloudinary.v2.uploader.upload(req.body.avtar,{
+    //         folder:"avtars",
+    //         width:150,
+    //         crop:"scale"
+    //     }) 
+        
+    // }
+    // console.log(req.body.avtar,'avtrrrr');
+    const myCloud = req.body.avtar !== 'undefined' ? await cloudinary.v2.uploader.upload(req.body.avtar,{
         folder:"avtars",
         width:150,
         crop:"scale"
-    })
-
-
+    }) : {}
+    
+    
     const {name,email, password } = req.body;
-
+    
     const user = await User.create({
         name,
         email,
@@ -32,6 +45,7 @@ exports.registerUser = catchAsyncError( async(req,res, next)=>{
 
 exports.loginUser = catchAsyncError( async(req,res, next)=>{
     const {email, password } = req.body; 
+    // console.log('login',req.body,email,password)
     if( !email || !password){
         return next(new ErrorHandler("Please Enter email and Password ", 400))
     }
@@ -47,6 +61,7 @@ exports.loginUser = catchAsyncError( async(req,res, next)=>{
         return next(new ErrorHandler("Invalid email and Password ", 401));
     }
 
+    // res.cookie('hlo2', 'canSotore second')
     sendToken(user,201,res)
 })
 
@@ -125,6 +140,8 @@ exports.resetPassword = catchAsyncError( async(req,res, next)=>{
 exports.getUserDetails = catchAsyncError( async(req,res, next)=>{
     const user= await User.findById(req.user.id);
 
+    
+    // res.cookie('hlo2', 'canSotore second')
     res.status(200).json({
         success:true,
         user

@@ -7,12 +7,15 @@ const sendToken = (user,statuscode,res)=>{
         ),
         httpOnly:true
     }
-
+    // console.log(token);
+    // res.cookie('myname','avinash')
+    // res.cookie("token",token)
     res.status(statuscode).cookie("token",token,options).json({
         success:true,
         user,
         token
 })
+// res.status(statuscode).json({token,user})
 }
 
 module.exports = sendToken

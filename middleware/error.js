@@ -3,6 +3,7 @@ const ErrorHandler = require('../utils/errorhandler')
 module.exports = (err,req,res,next)=>{
     err.statusCode = err.statusCode || 500;
     err.message = err.message || 'Ineternal Server Error';
+    // console.log('errrr' , err)
 
     if(err.name === "CastError"){
         const message= `Resource not found. Invalid ${err.path}`

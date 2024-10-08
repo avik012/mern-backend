@@ -12,5 +12,4 @@ router.route("/admin/product/new").post(isAuthenticatedUser, authorizeRoles("adm
 
 router.route("/admin/product/:id").put(isAuthenticatedUser, authorizeRoles("admin"),updateProduct).delete(isAuthenticatedUser, authorizeRoles("admin"),deleteProduct); 
 router.route("/admin/product/:id").get(getProductDetails)
-router.route("/admin/product/:id").get(getProductDetails)
 module.exports= router;  
