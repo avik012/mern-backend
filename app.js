@@ -11,11 +11,7 @@ const cors = require("cors")
 
 dotenv.config({path:"backend/config/config.env"});
 
-<<<<<<< HEAD
 app.use(cors({origin: 'https://avi-ecommerce.netlify.app', credentials: true}));  // when credentials on or authentication purpose then we must need to specify origin 
-=======
-app.use(cors({origin: 'https://avi-ecommerce.netlify.app/', credentials: true}));  // when credentials on or authentication purpose then we must need to specify origin 
->>>>>>> ec475de130ac46ddca60ac7a49f95285561ed437
 // app.use(cors()); // Allow all origins
 // app.use(cors({
 //     origin: '*', // Allow all origins
